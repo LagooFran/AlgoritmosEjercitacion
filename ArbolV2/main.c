@@ -88,6 +88,10 @@ int main()
 
     printf("Altura del arbol: %d", BuscarAltura(pArbolPruebas));
 
+    printf("Es completo? res: %d", EsCompleto(pArbolPruebas));
+
+    printf("Es balanceado? res: %d", EsBalanceado(pArbolPruebas));
+
     return 0;
 
 }
