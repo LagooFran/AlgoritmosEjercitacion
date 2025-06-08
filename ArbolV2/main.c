@@ -1,5 +1,6 @@
 
 #include "MiArbol.h"
+
 typedef struct{
     char nombre[20];
     int num;
@@ -7,13 +8,13 @@ typedef struct{
 
 int cmp(const void* data, const void* data2){
 
-    int *dataCast = (int*)data;
-    int *data2Cast = (int*)data2;
+    persona *dataCast = (persona*)data;
+    persona *data2Cast = (persona*)data2;
 
-    if(*dataCast > *data2Cast){
+    if(dataCast->num > data2Cast->num){
         return 1;
     }
-    else if(*dataCast < *data2Cast){
+    else if(dataCast->num < data2Cast->num){
         return -1;
     }
     else{
@@ -32,6 +33,7 @@ int main()
     tArbol arbolPruebas;
     tArbol *pArbolPruebas = &arbolPruebas;
 
+    ///cargo un monton de personas para probar
     persona p1;
     persona *pp1 = &p1;
     strcpy(pp1->nombre, "Franco");
@@ -40,19 +42,51 @@ int main()
     persona *pp2 = &p2;
     strcpy(pp2->nombre, "Agus");
     pp2->num = 20;
+    persona p3;
+    persona *pp3 = &p3;
+    strcpy(pp3->nombre, "Joaco");
+    pp3->num = 24;
+    persona p4;
+    persona *pp4 = &p4;
+    strcpy(pp4->nombre, "Camilo");
+    pp4->num = 13;
+    persona p5;
+    persona *pp5 = &p5;
+    strcpy(pp5->nombre, "Mariano");
+    pp5->num = 1;
+    persona p6;
+    persona *pp6 = &p6;
+    strcpy(pp6->nombre, "Alejo");
+    pp6->num = 29;
+    persona p7;
+    persona *pp7 = &p7;
+    strcpy(pp7->nombre, "Alejo");
+    pp7->num = 14;
+    persona p8;
+    persona *pp8 = &p8;
+    strcpy(pp8->nombre, "Alejo");
+    pp8->num = 23;
+
+    //persona pRes;
+    //persona *ppRes = &pRes;
 
     CrearArbol(pArbolPruebas);
 
-    printf("Arbol: %d\n", ArbolVacio(pArbolPruebas));
     InsertarEnArbol(pArbolPruebas, pp1, sizeof(persona), cmp);
-    printf("Arbol: %d\n", ArbolVacio(pArbolPruebas));
     InsertarEnArbol(pArbolPruebas, pp2, sizeof(persona), cmp);
+    InsertarEnArbol(pArbolPruebas, pp3, sizeof(persona), cmp);
+    InsertarEnArbol(pArbolPruebas, pp4, sizeof(persona), cmp);
+    InsertarEnArbol(pArbolPruebas, pp5, sizeof(persona), cmp);
+    InsertarEnArbol(pArbolPruebas, pp6, sizeof(persona), cmp);
+    InsertarEnArbol(pArbolPruebas, pp7, sizeof(persona), cmp);
+    InsertarEnArbol(pArbolPruebas, pp8, sizeof(persona), cmp);
+
+
     printf("Arbol: %d\n", ArbolVacio(pArbolPruebas));
 
     RecorrerEnOrden(pArbolPruebas, Mostrar);
-    RecorrerEnPosOrden(pArbolPruebas, Mostrar);
-    RecorrerEnPreOrden(pArbolPruebas, Mostrar);
 
+    printf("Altura del arbol: %d", BuscarAltura(pArbolPruebas));
 
     return 0;
 

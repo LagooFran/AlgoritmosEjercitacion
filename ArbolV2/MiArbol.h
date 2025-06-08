@@ -20,5 +20,7 @@ int ArbolLleno(size_t);
 void RecorrerEnOrden(tArbol *arbol, void (*mostrar)(const void*));
 void RecorrerEnPreOrden(tArbol *arbol, void (*mostrar)(const void*));
 void RecorrerEnPosOrden(tArbol *arbol, void (*mostrar)(const void*));
+int BuscarEnArbol(tArbol *, void *, void *, size_t , int (*cmp)(const void*, const void*));
+int BuscarAltura(tArbol *);
 
 #endif // MIARBOL_H_INCLUDED
