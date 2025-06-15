@@ -60,11 +60,11 @@ int main()
     pp6->num = 29;
     persona p7;
     persona *pp7 = &p7;
-    strcpy(pp7->nombre, "Alejo");
+    strcpy(pp7->nombre, "Facu");
     pp7->num = 14;
     persona p8;
     persona *pp8 = &p8;
-    strcpy(pp8->nombre, "Alejo");
+    strcpy(pp8->nombre, "Harry");
     pp8->num = 23;
 
     //persona pRes;
@@ -82,15 +82,13 @@ int main()
     InsertarEnArbol(pArbolPruebas, pp8, sizeof(persona), cmp);
 
 
-    printf("Arbol: %d\n", ArbolVacio(pArbolPruebas));
-
     RecorrerEnOrden(pArbolPruebas, Mostrar);
 
-    printf("Altura del arbol: %d", BuscarAltura(pArbolPruebas));
+    printf("\n");
 
-    printf("Es completo? res: %d", EsCompleto(pArbolPruebas));
+    EliminarNodo(pArbolPruebas, pp1, cmp);
 
-    printf("Es balanceado? res: %d", EsBalanceado(pArbolPruebas));
+    RecorrerEnOrden(pArbolPruebas, Mostrar);
 
     return 0;
 

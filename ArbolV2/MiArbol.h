@@ -24,5 +24,6 @@ int BuscarEnArbol(tArbol *, void *, void *, size_t , int (*cmp)(const void*, con
 int BuscarAltura(tArbol *);
 int EsCompleto(tArbol *);
 int EsBalanceado(tArbol *);
+int EliminarNodo(tArbol *arbol, void *data, int (*cmp)(const void*, const void*));
 
 #endif // MIARBOL_H_INCLUDED

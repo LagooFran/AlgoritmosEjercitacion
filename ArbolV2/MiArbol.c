@@ -115,27 +115,6 @@ int BuscarEnArbol(tArbol  *arbol, void *data, void  *dataDest, size_t dataSize, 
     return -1; ///no existe el nodo buscado
 }
 
-int BuscarEnArbolPuntero(tArbol  *arbol, void *data, void  *dataDest, size_t dataSize, int (*cmp)(const void*, const void*)){
-    int resCmp;
-    if(*arbol){
-        resCmp = cmp(data, (*arbol)->data);
-        if(resCmp == 1){
-            ///si lo que comparo es mas grande que el nodo en el que estoy me muevo hacia la derecha y busco en subarbol
-            BuscarEnArbol(&(*arbol)->der, data, dataDest, dataSize, cmp);
-        }
-        else if(resCmp == -1){
-            ///si lo que comparo es mas chico que el nodo en el que estoy me muevo hacia la izquierda y busco en subarbol
-            BuscarEnArbol(&(*arbol)->izq, data, dataDest, dataSize, cmp);
-        }
-        else{
-            *dataDest = *arbol;  ///si son iguales copio la data del nodo en dataDest
-            return 0; ///todo ok
-        }
-
-    }
-    return -1; ///no existe el nodo buscado
-}
-
 
 int BuscarNodoMasGrande(tArbol *arbol){
     int cont = 0;
@@ -237,35 +216,100 @@ int EsBalanceado(tArbol *arbol){
     }
 }
 
-///hay que arreglar esto...
+tArbol *BuscarEnArbolPtr(tArbol  *arbol, void *data, int (*cmp)(const void*, const void*)){
+    int resCmp;
+    if(*arbol){
+        resCmp = cmp(data, (*arbol)->data);
+        if(resCmp == 1){
+            ///si lo que comparo es mas grande que el nodo en el que estoy me muevo hacia la derecha y busco en subarbol
+            return BuscarEnArbolPtr(&(*arbol)->der, data, cmp);
+        }
+        else if(resCmp == -1){
+            ///si lo que comparo es mas chico que el nodo en el que estoy me muevo hacia la izquierda y busco en subarbol
+            return BuscarEnArbolPtr(&(*arbol)->izq, data, cmp);
+        }
+        else{
+            ///si son iguales retorno el puntero al nodo encontrado
+            return arbol;
+        }
 
-void BuscarMenorSubArbol(tArbol *arbol, void *dataDest){
+    }
+    return NULL; ///no existe el nodo buscado
+}
+
+tArbol *BuscarMenorSubArbol(tArbol *arbol){
+    if(ArbolVacio(arbol)){
+        return NULL;
+    }
     if((*arbol)->izq != NULL){
-        BuscarMenorSubArbol((*arbol)->izq, dataDest)
+        return BuscarMenorSubArbol(&(*arbol)->izq);
     }
     else{
-        dataDest = *arbol;
+        return arbol;
     }
 }
 
 
-int EliminarNodo(tArbol *arbol, void *data, size_t dataSize, int (*cmp)(const void*, const void*)){
-    ///busco la ubicacion del nodo a borrar
-    tNodo *nodoABorrar;
-    tNodo *nodoAReUbicar;
-    if(BuscarEnArbolPuntero(arbol, data, nodoABorrar, dataSize, cmp) == 0){
-        ///si encuentro el nodo a borrar
-        BuscarMenorSubArbol(arbol, nodoAReUbicar)
-        free((*nodoABorrar)->data);
-        free(nodoABorrar);
-        nodoABorrar = nodoAReUbicar;
+int EliminarNodo(tArbol *arbol, void *data, int (*cmp)(const void*, const void*)){
+
+    tArbol *nodoABorrar;
+
+    ///para la parte cuando se tienen 2 hijos
+    tArbol *nodoReemplazo;
+    tNodo *ptrReemplazo;
+    ///-----
+
+    tNodo *ptrNodoABorrar;
+    tNodo *ptrReubicar; ///el nodo que voy a poner donde esta estaba ptrNodoABorrar
+
+    if(ArbolVacio(arbol)){
+        ///arbol vacio
+        return -1;
+    }
+    nodoABorrar = BuscarEnArbolPtr(arbol, data, cmp);
+    if(nodoABorrar != NULL){
+        ptrNodoABorrar = *nodoABorrar;
+        if(EsHoja(nodoABorrar)){
+            free(ptrNodoABorrar->data);
+            free(ptrNodoABorrar);
+            *nodoABorrar = NULL;
+            return 0;
+        }
+        else if(ptrNodoABorrar->der == NULL){
+            ptrReubicar = ptrNodoABorrar->izq;
+            free(ptrNodoABorrar->data);
+            free(ptrNodoABorrar);
+            *nodoABorrar = ptrReubicar;
+            return 0;
+        }
+        else if(ptrNodoABorrar->izq == NULL){
+            ptrReubicar = ptrNodoABorrar->der;
+            free(ptrNodoABorrar->data);
+            free(ptrNodoABorrar);
+            *nodoABorrar = ptrReubicar;
+            return 0;
+        }
+        else{
+            ///los dos nodos hijos existen
+            nodoReemplazo = BuscarMenorSubArbol(&(ptrNodoABorrar->der));
+            ptrReemplazo = *nodoReemplazo;
+
+            free(ptrNodoABorrar->data);
+
+            ptrNodoABorrar->data = ptrReemplazo->data;
+            ptrNodoABorrar->dataSize = ptrReemplazo->dataSize;
+
+            *nodoReemplazo = ptrReemplazo->der;
+            free(ptrReemplazo);
+
+            return 0;
+        }
 
     }
     else{
-        ///el nodo a borrar no exite
+        ///No existe el nodo a borrar
         return -1;
     }
-
 
 }
 
