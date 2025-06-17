@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1750122819 source:/home/flago/Documentos/GitHub/AlgoritmosEjercitacion/Ejercicio Parcialito pilaspilas/ManejoPilasPilas.c
+
+1750126723 source:/home/flago/Documentos/GitHub/AlgoritmosEjercitacion/Ejercicio Parcialito pilaspilas/MiLista.c
+	"MiLista.h"
+
+1750126715 /home/flago/Documentos/GitHub/AlgoritmosEjercitacion/Ejercicio Parcialito pilaspilas/MiLista.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1750120485 source:/home/flago/Documentos/GitHub/AlgoritmosEjercitacion/Ejercicio Parcialito pilaspilas/MiPila.c
+	"MiPila.h"
+
+1750126523 /home/flago/Documentos/GitHub/AlgoritmosEjercitacion/Ejercicio Parcialito pilaspilas/MiPila.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1750178953 source:/home/flago/Documentos/GitHub/AlgoritmosEjercitacion/Ejercicio Parcialito pilaspilas/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"MiPila.h"
+	"MiLista.h"
+

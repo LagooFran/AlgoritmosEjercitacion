@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1750103063 source:/home/flago/Documentos/GitHub/AlgoritmosEjercitacion/MiPila/MiPila.c
+	"MiPila.h"
+
+1750102906 /home/flago/Documentos/GitHub/AlgoritmosEjercitacion/MiPila/MiPila.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1750103097 source:/home/flago/Documentos/GitHub/AlgoritmosEjercitacion/MiPila/main.c
+	<stdio.h>
+	<stdlib.h>
+	"MiPila.h"
+
