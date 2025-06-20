@@ -1,8 +1,7 @@
 #include "MiPila.h"
 
-int CrearPila(tPila *pila){
+void CrearPila(tPila *pila){
     *pila = NULL;
-    return 0;
 }
 
 int PilaVacia(tPila *pila){
@@ -12,66 +11,68 @@ int PilaVacia(tPila *pila){
     return 0;
 }
 
-int PilaLlena(size_t dataSize){
-    tNodo *nuevoNodo = malloc(sizeof(tNodo));
-    void *nuevaData;
-    if(nuevoNodo == NULL){
-        return 1;
-    }
-    else{
-        nuevaData = malloc(dataSize);
-        if(nuevaData == NULL){
-            free(nuevoNodo);
-            return 1;
-        }
-        free(nuevaData);
-        free(nuevoNodo);
-        return 0;
-    }
-
-}
-
 int Apilar(tPila *pila, void *data, size_t dataSize){
 
+    tNodo2 *nuevoNodo;
     void *nuevaData;
-    tNodo *pNuevoNodo;
 
-    if((pNuevoNodo = (tNodo *)malloc(sizeof(tNodo))) == NULL){
-        return -1;
+    if((nuevoNodo = (tNodo2*)malloc(sizeof(tNodo2))) == NULL){
+        return -1; ///malloc fallido
     }
     if((nuevaData = malloc(dataSize)) == NULL){
-        free(pNuevoNodo);
-        return -1;
+        free(nuevoNodo);
+        return -1; ///malloc fallido
     }
+
     memcpy(nuevaData, data, dataSize);
-    pNuevoNodo->data = nuevaData;
-    pNuevoNodo->dataSize = dataSize;
+    nuevoNodo->data = nuevaData;
+    nuevoNodo->dataSize = dataSize;
 
     if(PilaVacia(pila)){
-        pNuevoNodo->sig = NULL;
-        *pila = pNuevoNodo;
-        return 1;
-    }
-    else{
-        pNuevoNodo->sig = *pila;
-        *pila = pNuevoNodo;
-        return 1;
-    }
-
-}
-
-int DesApilar(tPila *pila, void *dataDest){
-    tNodo *auxNodo;
-
-    if(PilaVacia(pila)){
-        return -1; ///pila vacia
-    }
-    else{
-        auxNodo = *pila;
-        memcpy(dataDest, auxNodo->data, auxNodo->dataSize);
-        *pila = auxNodo->sig;
-        free(auxNodo->data);
-        free(auxNodo);
+        nuevoNodo->sig = NULL;
+        *pila = nuevoNodo;
         return 0;
     }
+    else{
+        nuevoNodo->sig = *pila;
+        *pila = nuevoNodo;
+        return 0;
+    }
+
 }
+
+int Desapilar(tPila *pila, void *dataDest){
+
+    tNodo2 *nodoActual = *pila;
+    tNodo2 *nodoSiguiente;
+
+    if(PilaVacia(pila)){
+        return -1; ///la pila esta vacia
+    }
+
+    memcpy(dataDest, nodoActual->data, nodoActual->dataSize);
+    nodoSiguiente = nodoActual->sig;
+    free(nodoActual->data);
+    free(nodoActual);
+    nodoActual = NULL;
+    *pila = nodoSiguiente;
+    return 0;
+
+}
+
+void DestruirPila(tPila *pila){
+
+    tNodo2 *nodoActual = *pila;
+    tNodo2 *nodoSiguiente;
+
+    while(nodoActual != NULL){
+        nodoSiguiente = nodoActual->sig;
+        free(nodoActual->data);
+        free(nodoActual);
+        nodoActual = NULL;
+        nodoActual = nodoSiguiente;
+    }
+
+    *pila = NULL;
+}
+

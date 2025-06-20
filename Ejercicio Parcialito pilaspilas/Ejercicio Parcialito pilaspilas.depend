@@ -24,3 +24,30 @@
 	"MiPila.h"
 	"MiLista.h"
 
+1750395143 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\ejercicio parcialito pilaspilas\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"MiPila.h"
+	"MiLista.h"
+
+1750391849 c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\ejercicio parcialito pilaspilas\mipila.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1750391846 c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\ejercicio parcialito pilaspilas\milista.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"MiPila.h"
+
+1750361725 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\ejercicio parcialito pilaspilas\manejopilaspilas.c
+
+1750395280 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\ejercicio parcialito pilaspilas\milista.c
+	"MiLista.h"
+	"MiPila.h"
+
+1750395282 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\ejercicio parcialito pilaspilas\mipila.c
+	"MiPila.h"
+

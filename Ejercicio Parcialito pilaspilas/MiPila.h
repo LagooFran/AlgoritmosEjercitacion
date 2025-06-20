@@ -4,15 +4,18 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct sNodo{
+typedef struct sNodo2{
     void *data;
     size_t dataSize;
-    struct sNodo *sig;
-}tNodo;
+    struct sNodo2 *sig;
+}tNodo2;
 
-typedef tNodo *tPila;
-int CrearPila(tPila *);
-int Apilar(tPila *, void *, size_t);
-int DesApilar(tPila *, void *);
+typedef tNodo2 *tPila;
+
+void DestruirPila(tPila *);
+int Desapilar(tPila *, void *);
+int Apilar(tPila *, void *, size_t );
+int PilaVacia(tPila *);
+void CrearPila(tPila *);
 
 #endif // MIPILA_H_INCLUDED

@@ -1,81 +1,90 @@
 #include "MiLista.h"
+#include "MiPila.h"
 
-int CrearLista(tLista * lista){
+void CrearLista(tLista *lista){
     *lista = NULL;
-    return 0;
 }
 
 int ListaVacia(tLista *lista){
+
     if(*lista == NULL){
         return 1;
     }
+    return 0;
+}
+
+
+int AgregarAlFinal(tLista *lista, void *data, size_t dataSize){
+
+    tNodo *nodoActual = *lista;
+    tNodo *nuevoNodo;
+    void *nuevaData;
+
+    if((nuevoNodo = (tNodo*)malloc(sizeof(tNodo))) == NULL){
+        return -1; ///malloc fallido
+    }
+    if((nuevaData = malloc(dataSize)) == NULL){
+        free(nuevoNodo);
+        return -1; ///malloc fallido
+    }
+
+    memcpy(nuevaData, data, dataSize);
+    nuevoNodo->data = nuevaData;
+    nuevoNodo->dataSize = dataSize;
+    nuevoNodo->sig = NULL;
+
+    if(ListaVacia(lista)){
+        *lista = nuevoNodo;
+        return 0;
+    }
     else{
+        while(nodoActual->sig != NULL){
+            nodoActual = nodoActual->sig; ///voy hasta el ultimo nodo
+        }
+        nodoActual->sig = nuevoNodo;
+        return 0;
+    }
+
+}
+
+int SacarDelFinal(tLista *lista, void *dataDest){
+    tNodo *nodoActual = *lista;
+    tNodo *nodoAnterior = NULL;
+
+    if(ListaVacia(lista)){
+        return -1; ///lista vacia no hay nodos que sacar
+    }
+    else{
+        while(nodoActual->sig != NULL){
+            nodoAnterior = nodoActual;
+            nodoActual = nodoActual->sig; ///voy hasta el ultimo nodo
+        }
+
+        memcpy(dataDest, nodoActual->data, nodoActual->dataSize);
+        free(nodoActual->data);
+        free(nodoActual);
+        if(nodoAnterior != NULL){
+            nodoAnterior->sig = NULL;
+        }
+        else{
+            *lista = NULL;
+        }
         return 0;
     }
 }
 
-int PonerAlFinal(tLista *lista, void *data, size_t dataSize){
+void DestruirLista(tLista *lista){
 
-    tNodo *pNodoActual;
-    tNodo *pNuevoNodo;
-    void *pNuevaData;
+    tNodo *nodoActual = *lista;
+    tNodo *nodoSiguiente;
 
-    if((pNuevoNodo = malloc(sizeof(tNodo))) == NULL){
-        return -1; ///No hay espacio para crear el nodo
-    }
-    else if((pNuevaData = malloc(dataSize)) == NULL){
-        free(pNuevoNodo);
-        return -1; ///No hay espacio para alojar la data
+    while(nodoActual != NULL){
+        nodoSiguiente = nodoActual->sig;
+        free(nodoActual->data);
+        free(nodoActual);
+        nodoActual = nodoSiguiente;
     }
 
-    ///copio la data
-    memcpy(pNuevaData, data, dataSize);
-    pNuevoNodo->data = pNuevaData;
-    pNuevoNodo->dataSize = dataSize;
-    pNuevoNodo->sig = NULL;
+    *lista = NULL;
 
-    if(ListaVacia(lista)){
-        *lista = pNuevoNodo;
-    }
-    else{
-        ///Creo una variable aux
-        pNodoActual = *lista;
-        while(pNodoActual->sig != NULL){
-            pNodoActual = pNodoActual->sig;
-        }
-        ///llego al ultimo entonces ahora agrego el nuevo nodo al final
-        pNodoActual->sig = pNuevoNodo;
-    }
-
-    return 0;
-}
-
-int SacarDelFinal(tLista *lista, void *dataDest){
-    tNodo *pNodoActual;
-    tNodo *pNodoAnterior = NULL;
-    pNodoActual = *lista;
-
-    ///busco el ultimo elemento de la lista y lo devuelvo.
-    if(ListaVacia(lista)){
-        return -1; ///lista vacia
-    }
-
-    ///busco el utlimo elemento
-    while(pNodoActual->sig != NULL){
-        pNodoAnterior = pNodoActual;
-        pNodoActual = pNodoActual->sig;
-    }
-
-    memcpy(dataDest, pNodoActual->data, pNodoActual->dataSize);
-    free(pNodoActual->data);
-    free(pNodoActual);
-
-    if(pNodoAnterior == NULL){
-        *lista = NULL;
-    }
-    else{
-        pNodoAnterior->sig = NULL;
-    }
-
-    return 0;
 }

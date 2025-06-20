@@ -4,122 +4,90 @@
 #include "MiPila.h"
 #include "MiLista.h"
 
-typedef struct{
-    char nombre[20];
-    int num;
-}persona;
+void ProcesarPilas(tPila *, tPila *);
 
 int main()
 {
-    tPila pila1;
-    tPila *pPila1 = &pila1;
-    CrearPila(pPila1);
-
-    tPila pila2;
-    tPila *pPila2 = &pila2;
-    CrearPila(pPila2);
-
-    tPila pila3;
-    tPila *pPila3 = &pila3;
-    CrearPila(pPila3);
-
+    tPila pilaT1;
+    tPila pilaT2;
+    tPila pilaT3;
     tPila pilaPilas;
+    tPila pilaRes;
+
+    tPila *pPilaT1 = &pilaT1;
+    tPila *pPilaT2 = &pilaT2;
+    tPila *pPilaT3 = &pilaT3;
     tPila *pPilaPilas = &pilaPilas;
+    tPila *pPilaRes = &pilaRes;
+
+    CrearPila(pPilaT1);
+    CrearPila(pPilaT2);
+    CrearPila(pPilaT3);
     CrearPila(pPilaPilas);
+    CrearPila(pPilaRes);
 
-    ///una pila que adentro guarda otras pilas.
-    ///Una funcion que de la pila de pilas haga una pila entera
+    int auxEntero = 1;
 
-    tLista lista;
-    tLista *pLista = &lista;
-    CrearLista(pLista);
+    Apilar(pPilaT1, (void*)&auxEntero, sizeof(int));
+    auxEntero = 2;
+    Apilar(pPilaT1, (void*)&auxEntero, sizeof(int));
+    auxEntero = 3;
+    Apilar(pPilaT1, (void*)&auxEntero, sizeof(int));
 
-    ///cargo un monton de personas para probar
-    persona p1;
-    persona *pp1 = &p1;
-    strcpy(pp1->nombre, "Franco");
-    pp1->num = 21;
-    persona p2;
-    persona *pp2 = &p2;
-    strcpy(pp2->nombre, "Agus");
-    pp2->num = 20;
-    persona p3;
-    persona *pp3 = &p3;
-    strcpy(pp3->nombre, "Joaco");
-    pp3->num = 24;
-    persona p4;
-    persona *pp4 = &p4;
-    strcpy(pp4->nombre, "Camilo");
-    pp4->num = 13;
-    persona p5;
-    persona *pp5 = &p5;
-    strcpy(pp5->nombre, "Mariano");
-    pp5->num = 1;
-    persona p6;
-    persona *pp6 = &p6;
-    strcpy(pp6->nombre, "Alejo");
-    pp6->num = 29;
-    persona p7;
-    persona *pp7 = &p7;
-    strcpy(pp7->nombre, "Facu");
-    pp7->num = 14;
-    persona p8;
-    persona *pp8 = &p8;
-    strcpy(pp8->nombre, "Harry");
-    pp8->num = 23;
+    auxEntero = 4;
+    Apilar(pPilaT2, (void*)&auxEntero, sizeof(int));
+    auxEntero = 5;
+    Apilar(pPilaT2, (void*)&auxEntero, sizeof(int));
+    auxEntero = 6;
+    Apilar(pPilaT2, (void*)&auxEntero, sizeof(int));
 
-    void *pPres = malloc(sizeof(persona));
-    persona *pRes;
+    auxEntero = 7;
+    Apilar(pPilaT3, (void*)&auxEntero, sizeof(int));
+    auxEntero = 8;
+    Apilar(pPilaT3, (void*)&auxEntero, sizeof(int));
+    auxEntero = 9;
+    Apilar(pPilaT3, (void*)&auxEntero, sizeof(int));
 
-    ///hago 3 pilas para poder probar
-    Apilar(pPila1, pp1, sizeof(persona));
-    Apilar(pPila1, pp2, sizeof(persona));
-    Apilar(pPila1, pp3, sizeof(persona));
+    ///orden de salida de la pila deberia ser 9,8,7,6,5,4,3,2,1
 
-    Apilar(pPila2, pp4, sizeof(persona));
-    Apilar(pPila2, pp5, sizeof(persona));
-    Apilar(pPila2, pp6, sizeof(persona));
+    Apilar(pPilaPilas, pPilaT1, sizeof(tPila));
+    Apilar(pPilaPilas, pPilaT2, sizeof(tPila));
+    Apilar(pPilaPilas, pPilaT3, sizeof(tPila));
 
-    Apilar(pPila3, pp7, sizeof(persona));
-    Apilar(pPila3, pp8, sizeof(persona));
+    ///apilo las pilas para hacer la prueba
+    ///ahora tengo que hacer una funcion que ponga todas las pilas en una sola
+    /*
+    Desapilar(pPilaPilas, pPilaRes);
+    Desapilar(pPilaRes, &auxEntero);
+    printf("%d", auxEntero);
+    Desapilar(pPilaRes, &auxEntero);
+    printf("%d", auxEntero);
+    Desapilar(pPilaRes, &auxEntero);
+    printf("%d", auxEntero);
+    */
+    ProcesarPilas(pPilaPilas, pPilaRes);
+}
 
-    ///apilo las pilas dentro de otra pila. PilaPilas!
+void ProcesarPilas(tPila *pilasPilas, tPila *pilaResultante){
 
-    Apilar(pPilaPilas, pPila1, sizeof(tPila));
-    Apilar(pPilaPilas, pPila2, sizeof(tPila));
-    Apilar(pPilaPilas, pPila3, sizeof(tPila));
+    tLista listaPilas;
+    tLista listaEnteros;
+    tLista *pListaPilas = &listaPilas;
+    tLista *pListaEnteros = &listaEnteros;
+    tPila pPilaAux;
+    int auxEntero;
 
+    CrearLista(pListaEnteros);
+    CrearLista(pListaPilas);
 
-    ///desapilo y guardo en lista
-    DesApilar(pPila1, pPres);
-    pRes = (persona *)pPres;
-    PonerAlFinal(pLista, pRes, sizeof(persona));
-
-    DesApilar(pPila1, pPres);
-    pRes = (persona *)pPres;
-    PonerAlFinal(pLista, pRes, sizeof(persona));
-
-    DesApilar(pPila1, pPres);
-    pRes = (persona *)pPres;
-    PonerAlFinal(pLista, pRes, sizeof(persona));
-
-    ///saco de la lista
-    SacarDelFinal(pLista, pPres);
-    pRes = (persona *)pPres;
-    printf("nombre: %s\n", pRes->nombre);
-
-    SacarDelFinal(pLista, pPres);
-    pRes = (persona *)pPres;
-    printf("nombre: %s\n", pRes->nombre);
-
-    SacarDelFinal(pLista, pPres);
-    pRes = (persona *)pPres;
-    printf("nombre: %s\n", pRes->nombre);
-    ///deberia salir en el orden que fue cargado pp1 pp2 pp3
-
-    ///para hacer esto necesito primero implementar pila con una estrucctura de datos que tenga una pila adentro
-    ///luego guardar esa pila de alguna manera que me permita recorrerla en orden
-
-    free(pPres);
+    while(!PilaVacia(pilasPilas)){
+        Desapilar(pilasPilas, &pPilaAux);
+        Desapilar(&pPilaAux, &auxEntero);
+        printf("%d\n", auxEntero);
+        Desapilar(&pPilaAux, &auxEntero);
+        printf("%d\n", auxEntero);
+        Desapilar(&pPilaAux, &auxEntero);
+        printf("%d\n", auxEntero);
+    } ///agrego todas las pilas a la lista.
 
 }

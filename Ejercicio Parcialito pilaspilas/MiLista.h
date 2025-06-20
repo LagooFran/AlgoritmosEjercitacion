@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "MiPila.h"
 
 typedef struct sNodo{
 
@@ -12,9 +13,13 @@ typedef struct sNodo{
 }tNodo;
 
 typedef tNodo *tLista;
-int CrearLista(tLista *);
-int SacarDelFinal(tLista *, void *);
-int PonerAlFinal(tLista *, void *, size_t);
+
+
+void CrearLista(tLista *lista);
+int ListaVacia(tLista *lista);
+int AgregarAlFinal(tLista *lista, void *data, size_t dataSize);
+int SacarDelFinal(tLista *lista, void *dataDest);
+void DestruirLista(tLista *lista);
 
 
 #endif // MILISTA_H_INCLUDED
