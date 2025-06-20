@@ -66,6 +66,10 @@ int main()
     printf("%d", auxEntero);
     */
     ProcesarPilas(pPilaPilas, pPilaRes);
+    while(!PilaVacia(pPilaRes)){
+        Desapilar(pPilaRes, &auxEntero);
+        printf("%d", auxEntero);
+    }
 }
 
 void ProcesarPilas(tPila *pilasPilas, tPila *pilaResultante){
@@ -82,12 +86,15 @@ void ProcesarPilas(tPila *pilasPilas, tPila *pilaResultante){
 
     while(!PilaVacia(pilasPilas)){
         Desapilar(pilasPilas, &pPilaAux);
-        Desapilar(&pPilaAux, &auxEntero);
-        printf("%d\n", auxEntero);
-        Desapilar(&pPilaAux, &auxEntero);
-        printf("%d\n", auxEntero);
-        Desapilar(&pPilaAux, &auxEntero);
-        printf("%d\n", auxEntero);
-    } ///agrego todas las pilas a la lista.
+        while(!PilaVacia(&pPilaAux)){
+            Desapilar(&pPilaAux, &auxEntero);
+            AgregarAlFinal(pListaEnteros, &auxEntero, sizeof(int));
+        }
+    } ///agrego todas los valores de las pilas a la lista.
 
+    ///apilo todos los valores en la pila resultante.
+    while(!ListaVacia(pListaEnteros)){
+        SacarDelFinal(pListaEnteros, &auxEntero);
+        Apilar(pilaResultante, &auxEntero, sizeof(int));
+    }
 }
