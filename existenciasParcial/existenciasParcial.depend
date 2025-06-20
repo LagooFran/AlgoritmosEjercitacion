@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1750446711 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\existenciasparcial\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"MiArbol.h"
+
+1750447282 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\existenciasparcial\miarbol.c
+	"MiArbol.h"
+
+1750446541 c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\existenciasparcial\miarbol.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1750449079 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\existenciasparcial\milista.c
+	"MiLista.h"
+
+1750449087 c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\existenciasparcial\milista.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
