@@ -260,3 +260,47 @@ int InsertarOrdenado(tListaDE *lista, void *data, size_t dataSize, int(cmp)(void
 
 }
 
+void DestruirLista(tListaDE *lista){
+
+    tNodo *nodoActual = *lista;
+    tNodo *nodoSiguiente = *lista;
+
+    if(ListaVaciaDE(lista)){
+        return;
+    }
+
+    while(nodoActual != NULL){
+        nodoSiguiente = nodoActual->sig;
+        free(nodoActual->data);
+        free(nodoActual);
+        nodoActual = nodoSiguiente;
+    }
+
+    *lista = NULL;
+
+}
+
+int CantidadElementos(tListaDE *lista){
+    tNodo *nodoActual = *lista;
+    int cont = 0;
+    while(nodoActual != NULL){
+        cont++;
+        nodoActual = nodoActual->sig;
+    }
+    return cont;
+}
+
+int CantidadDeApariciones(tListaDE *lista, void *data, int (cmp)(void *, void *)){
+
+    tNodo *nodoActual = *lista;
+    int cont = 0;
+    int comparacion;
+    while(nodoActual != NULL){
+        comparacion = cmp(data, nodoActual->data);
+        if(comparacion == 0){
+            cont++;
+        }
+        nodoActual = nodoActual->sig;
+    }
+    return cont;
+}
