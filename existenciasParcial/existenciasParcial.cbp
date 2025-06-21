@@ -31,6 +31,14 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="MiArbol.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="MiArbol.h" />
+		<Unit filename="MiLista.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="MiLista.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

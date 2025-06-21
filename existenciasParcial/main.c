@@ -50,6 +50,20 @@ int CmpIdRes(void *data1, void *data2){
     }
 }
 
+int CmpIdIndice(void *data1, void *data2){
+    int *dataCast1 = (int *)data1;
+    indice *dataCast2 = (indice *)data2;
+    if(*dataCast1 > dataCast2->id){
+        return 1;
+    }
+    else if(*dataCast1 < dataCast2->id){
+        return -1;
+    }
+    else{
+        return 0;
+    }
+}
+
 void MostrarIndice(void *data1){
     indice *dataCast1 = (indice *)data1;
     printf("Indice ID: %d, offset: %ld\n", dataCast1->id, dataCast1->offset);
@@ -65,7 +79,7 @@ void AcumularRes(void *data1, void *data2){
 int main()
 {
     FILE *fp;
-    /*
+
     ///cargar archivo existencias
     fp = fopen("maestro_de_existencias.dat", "wb");
     existencias auxExis;
@@ -95,15 +109,15 @@ int main()
     fp = fopen("movimientos.dat", "wb");
     operacion auxOp;
     auxOp.id_producto = 1;
-    auxOp.cantidad = 3;
+    auxOp.cantidad = 1;
     auxOp.tipo = 'i';
     fwrite(&auxOp, sizeof(operacion), 1, fp);
-    auxOp.id_producto = 2;
+    auxOp.id_producto = 1;
     auxOp.cantidad = 4;
     auxOp.tipo = 'e';
     fwrite(&auxOp, sizeof(operacion), 1, fp);
-    auxOp.id_producto = 3;
-    auxOp.cantidad = 2;
+    auxOp.id_producto = 2;
+    auxOp.cantidad = 1;
     auxOp.tipo = 'i';
     fwrite(&auxOp, sizeof(operacion), 1, fp);
     auxOp.id_producto = 3;
@@ -111,7 +125,7 @@ int main()
     auxOp.tipo = 'e';
     fwrite(&auxOp, sizeof(operacion), 1, fp);
     fclose(fp);
-    */
+
     ///una vez cargados los archivos puedo comenzar con el ej.
 
     ///punto1 genere un indice (arbol)
@@ -135,29 +149,54 @@ int main()
     }
     fclose(fp);
 
-    ///ej2
+    ///ej2 generar una lista con los resumenes de los movimientos
     fp = fopen("movimientos.dat", "rb");
-    operacion auxOp;
-    operacion *pAuxOp = &auxOp;
+    operacion auxOp2;
+    operacion *pAuxOp2 = &auxOp2;
     resumen auxRes;
     resumen *pAuxRes = &auxRes;
     pAuxRes->balance = 0;
     tLista resumenes;
     tLista *pResumenes = &resumenes;
     CrearLista(pResumenes);
-    while(!feof(fp)){
-        fread(pAuxOp, sizeof(operacion), 1, fp);
-        pAuxRes->id_producto = pAuxOp->id_producto;
-        if(pAuxOp->tipo == 'i'){
-            pAuxRes->balance = pAuxRes->balance + pAuxOp->cantidad;
+    while(fread(pAuxOp2, sizeof(operacion), 1, fp)==1){
+        pAuxRes->balance = 0;
+        pAuxRes->id_producto = pAuxOp2->id_producto;
+        if(pAuxOp2->tipo == 'i'){
+            pAuxRes->balance = pAuxRes->balance + pAuxOp2->cantidad;
         }
         else{
-            pAuxRes->balance = pAuxRes->balance - pAuxOp->cantidad;
+            pAuxRes->balance = pAuxRes->balance - pAuxOp2->cantidad;
         }
         InsertarSinDuplicados(pResumenes, pAuxRes, sizeof(resumen), CmpIdRes, AcumularRes);
     }
     fclose(fp);
 
-    ///ej4
+    ///ej3 actualizar el archivo de existencias utilizando el indice
+    fp = fopen("maestro_de_existencias.dat", "rb+");
+    long offsetBusqueda = 0;
+    int auxId;
+    int *pAuxId = &auxId;
+    indice indiceRes;
+    indice *pIndiceRes = &indiceRes;
+    existencias exisLeida;
+    existencias *pExisLeida = &exisLeida;
+
+    while(!ListaVacia(pResumenes)){
+        SacarDelFinal(pResumenes, pAuxRes);
+        auxId = pAuxRes->id_producto;
+        BuscarEnArbol(pIndiceExistencias, pIndiceRes, pAuxId, CmpIdIndice);
+        offsetBusqueda = pIndiceRes->offset;
+        fseek(fp, offsetBusqueda, SEEK_SET);
+        fread(pExisLeida, sizeof(existencias), 1, fp);
+        pExisLeida->existencias = pExisLeida->existencias + pAuxRes->balance;
+        fseek(fp, offsetBusqueda, SEEK_SET);
+        fwrite(pExisLeida, sizeof(existencias), 1, fp);
+        printf("Existencia actualizada ID %d, nueva cantidad %d\n", pExisLeida->id_producto, pExisLeida->existencias);
+    }
+
+    fclose(fp);
+
+    ///ej4 mostrar in orden el indice
     RecorrerInOrden(pIndiceExistencias, MostrarIndice);
 }

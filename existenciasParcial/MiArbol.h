@@ -23,5 +23,6 @@ int InsertarEnArbol(tArbol *, void *, size_t , int (cmp)(void*, void*));
 int ArbolVacio(tArbol *);
 void CrearArbol(tArbol *);
 void RecorrerInOrden(tArbol *, void (mostrar)(void*));
+int BuscarEnArbol(tArbol *, void *, void *, int (cmp)(void*, void*));
 
 #endif // MIARBOL_H_INCLUDED

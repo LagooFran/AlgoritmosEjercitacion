@@ -21,3 +21,26 @@
 	<stdlib.h>
 	<string.h>
 
+1750462523 source:/home/flago/Documents/GitHub/AlgoritmosEjercitacion/existenciasParcial/MiArbol.c
+	"MiArbol.h"
+
+1750472524 /home/flago/Documents/GitHub/AlgoritmosEjercitacion/existenciasParcial/MiArbol.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1750462523 source:/home/flago/Documents/GitHub/AlgoritmosEjercitacion/existenciasParcial/MiLista.c
+	"MiLista.h"
+
+1750472518 /home/flago/Documents/GitHub/AlgoritmosEjercitacion/existenciasParcial/MiLista.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1750472394 source:/home/flago/Documents/GitHub/AlgoritmosEjercitacion/existenciasParcial/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"MiArbol.h"
+	"MiLista.h"
+
