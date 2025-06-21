@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1750518385 source:/home/flago/Documents/GitHub/AlgoritmosEjercitacion/ListaDoblementeEnlazada/main.c
+	<stdio.h>
+	<stdlib.h>
+
