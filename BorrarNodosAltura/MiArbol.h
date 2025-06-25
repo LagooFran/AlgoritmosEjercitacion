@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 typedef struct sNodo{
     void *data;
@@ -26,7 +27,9 @@ int EsCompleto(tArbol *);
 int EsBalanceado(tArbol *);
 int EliminarNodo(tArbol *, void *, int (*cmp)(void*, void*));
 int EncontrarAlturaNodo(tArbol *, void *, int (cmp)(void *, void *));
-
+int EncontrarCantidadNodos(tArbol *);
+void EliminarNodosSuperanAltura(tArbol *, int, int);
+int AlturaArbolV2(tArbol *);
 
 
 

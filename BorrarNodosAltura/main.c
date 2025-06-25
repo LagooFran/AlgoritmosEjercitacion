@@ -124,11 +124,17 @@ int main()
 
     RecorrerEnOrden(pArbolPruebas, Mostrar);
 
-    printf("\n");
+    printf("Cantidad de nodos: %d\n\n", EncontrarCantidadNodos(pArbolPruebas));
 
-    BorrarNodosEnAltura(pArbolPruebas, 3, cmp);
+    EliminarNodosSuperanAltura(pArbolPruebas, 4, 1);
 
     RecorrerEnOrden(pArbolPruebas, Mostrar);
+
+    printf("\n");
+
+    ///BorrarNodosEnAltura(pArbolPruebas, 3, cmp);
+
+    ///RecorrerEnOrden(pArbolPruebas, Mostrar);
 
     return 0;
 }

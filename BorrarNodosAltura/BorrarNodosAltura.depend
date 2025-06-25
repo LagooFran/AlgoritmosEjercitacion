@@ -1,13 +1,14 @@
 # depslib dependency file v1.0
-1750812258 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\borrarnodosaltura\miarbol.c
+1750875649 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\borrarnodosaltura\miarbol.c
 	"MiArbol.h"
 
-1750812357 c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\borrarnodosaltura\miarbol.h
+1750875407 c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\borrarnodosaltura\miarbol.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	<math.h>
 
-1750864809 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\borrarnodosaltura\milista.c
+1750865605 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\borrarnodosaltura\milista.c
 	"MiLista.h"
 
 1750864802 c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\borrarnodosaltura\milista.h
@@ -15,7 +16,7 @@
 	<stdlib.h>
 	<string.h>
 
-1750864843 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\borrarnodosaltura\main.c
+1750875595 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\borrarnodosaltura\main.c
 	<stdio.h>
 	<stdlib.h>
 	"MiLista.h"

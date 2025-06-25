@@ -74,6 +74,7 @@ int InsertarEnArbol(tArbol *arbol, void *data, size_t dataSize, int (*cmp)(void*
 void RecorrerEnOrden(tArbol *arbol, void (*mostrar)(const void*)) {
     if (*arbol) {
         RecorrerEnOrden(&(*arbol)->izq, mostrar);
+        printf("Altura: %d   -", AlturaArbolV2(arbol));
         mostrar((*arbol)->data);
         RecorrerEnOrden(&(*arbol)->der, mostrar);
     }
@@ -423,4 +424,58 @@ int EliminarNodo(tArbol *arbol, void *dataElm, int (cmp)(void *, void *)){
     }
 }
 
+int EncontrarCantidadNodos(tArbol *arbol){
+    int tot;
+    if(*arbol == NULL){
+        return 0;
+    }
+    tot = EncontrarCantidadNodos(&(*arbol)->der) + EncontrarCantidadNodos(&(*arbol)->izq) + 1;
+    return tot;
+}
 
+int EsCompletoFormula(tArbol *arbol){
+    int altura = AlturaArbolV2(arbol)+1;
+    int cantNodos = EncontrarCantidadNodos(arbol);
+    return cantNodos == pow(2,altura)-1;
+}
+
+int CantidadDeNodosHastaNivel(tArbol *arbol, int nivel){
+    if(*arbol == NULL){
+        return 0;
+    }
+    if(nivel==0){
+        return 1;
+    }
+    return CantidadDeNodosHastaNivel(&(*arbol)->der, nivel-1) + CantidadDeNodosHastaNivel(&(*arbol)->izq, nivel-1) + 1;
+}
+
+int EsBalanceadoFormula(tArbol *arbol){
+    int altura = AlturaArbolV2(arbol)+1;
+    return CantidadDeNodosHastaNivel(arbol, altura-2) == pow(2, altura-1)-1;
+}
+
+void EliminarArbol(tArbol *arbol){
+    ///a partir de un nodo borro todo lo que hay en sus subarboles y borro el nodo.
+    if (*arbol) {
+        EliminarArbol(&(*arbol)->izq);
+        EliminarArbol(&(*arbol)->der);
+        free((*arbol)->data);
+        free(*arbol);
+        *arbol = NULL;
+    }
+}
+
+void EliminarNodosSuperanAltura(tArbol *arbol, int alturaMax, int nivelActual){
+        ///a partir de un nodo borro todo lo que hay en sus subarboles y borro el nodo.
+    if(ArbolVacio(arbol)){
+        return;
+    }
+    if(nivelActual == alturaMax){
+        EliminarArbol(&(*arbol)->izq);
+        EliminarArbol(&(*arbol)->der);
+        return;
+    }
+    EliminarNodosSuperanAltura(&(*arbol)->izq, alturaMax, nivelActual + 1);
+    EliminarNodosSuperanAltura(&(*arbol)->der, alturaMax, nivelActual + 1);
+
+}
