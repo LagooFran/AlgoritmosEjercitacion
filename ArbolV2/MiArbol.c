@@ -17,7 +17,7 @@ int ArbolLleno(size_t dataSize){
     ///retorna -1 si esta lleno 0 si tiene espacio
     tNodo *nuevoNodo;
     void *data;
-    nuevoNodo = (tNodo*)malloc(sizeof(nuevoNodo));
+    nuevoNodo = (tNodo*)malloc(sizeof(tNodo));
     if(nuevoNodo == NULL){
         return -1;
     }
@@ -34,7 +34,7 @@ int ArbolLleno(size_t dataSize){
 }
 
 
-int InsertarEnArbol(tArbol *arbol, void *data, size_t dataSize, int (*cmp)(const void*, const void*)){
+int InsertarEnArbol(tArbol *arbol, void *data, size_t dataSize, int (*cmp)(void*, void*)){
     ///retorno -1 si fallo retorno 0 si cargo el nodo correctamente 1 si ya existe el nodo.
     int resCmp;
     tNodo *nuevoNodo;
@@ -62,6 +62,7 @@ int InsertarEnArbol(tArbol *arbol, void *data, size_t dataSize, int (*cmp)(const
     ///cuando llego a un nodo nulo ya puedo insertar mi info
     nuevoNodo = (tNodo*)malloc(sizeof(tNodo));
     nuevoNodo->data = malloc(dataSize);
+    nuevoNodo->dataSize = dataSize;
     memcpy(nuevoNodo->data, data, dataSize);
     nuevoNodo->der = NULL;
     nuevoNodo->izq = NULL;
@@ -216,7 +217,7 @@ int EsBalanceado(tArbol *arbol){
     }
 }
 
-tArbol *BuscarEnArbolPtr(tArbol  *arbol, void *data, int (*cmp)(const void*, const void*)){
+tArbol *BuscarEnArbolPtr(tArbol  *arbol, void *data, int (*cmp)(void*, void*)){
     int resCmp;
     if(*arbol){
         resCmp = cmp(data, (*arbol)->data);
@@ -249,7 +250,7 @@ tArbol *BuscarMenorSubArbol(tArbol *arbol){
     }
 }
 
-
+/*
 int EliminarNodo(tArbol *arbol, void *data, int (*cmp)(const void*, const void*)){
 
     tArbol *nodoABorrar;
@@ -312,5 +313,113 @@ int EliminarNodo(tArbol *arbol, void *data, int (*cmp)(const void*, const void*)
     }
 
 }
+*/
 
+int EncontrarAlturaNodo(tArbol *arbol, void *dataBsc, int (cmp)(void *, void *)){
+    ///bajar en el arbol buscando el nodo e ir contando la cantidad de bajadas.
+    tNodo *nodoActual = *arbol;
+    int comparacion, altura = 0;
+    while(nodoActual != NULL){
+        comparacion = cmp(nodoActual->data, dataBsc);
+        if(comparacion == 0){
+            return altura;
+        }
+        else{
+            altura++;
+            if(comparacion == 1){
+                nodoActual = nodoActual->der;
+            }
+            else{
+                nodoActual = nodoActual->izq;
+            }
+        }
+    }
+    return -1; ///nodo no encontrado.
+
+}
+
+int AlturaArbolV2(tArbol *arbol){
+    tNodo *nodoActual = *arbol;
+    int der;
+    int izq;
+
+    if(nodoActual == NULL){
+        return 0;
+    }
+    else{
+        der = AlturaArbolV2(&(nodoActual)->der);
+        izq = AlturaArbolV2(&(nodoActual)->izq);
+        if(der>izq){
+            return 1+der;
+        }
+        else{
+            return 1+izq;
+        }
+    }
+}
+
+int EliminarNodo(tArbol *arbol, void *dataElm, int (cmp)(void *, void *)){
+    tArbol *nodoAReemplazar;
+    tNodo *nodoReemplazo;
+
+    tArbol *pNodoReemplazo;
+
+    void *dataCopiada;
+
+    ///busco el nodo a que tengo que reemplazar
+    nodoAReemplazar = BuscarEnArbolPtr(arbol, dataElm, cmp);
+    if(nodoAReemplazar == NULL){
+        return -1; ///no se encontro un nodo a borrar
+    }
+
+    ///una vez tengo ese nodo busco el nodo por el cual lo voy a reemplazar.
+    if(EsHoja(nodoAReemplazar)){
+        ///si el nodo es hoja lo borro
+        free((*nodoAReemplazar)->data);
+        free(*nodoAReemplazar);
+        *nodoAReemplazar = NULL;
+        return 0;
+    }
+
+    ///en casos donde no sea hoja busco el nodo candidato a reemplazar el nodo que voy a borrar para mantener la estructura.
+    if((*nodoAReemplazar)->izq == NULL){
+        ///si no tiene nodo izquierdo
+        ///reemplazo por el siguiente derecho.
+        nodoReemplazo = (*nodoAReemplazar)->der;
+        free((*nodoAReemplazar)->data);
+        free(*nodoAReemplazar);
+        *nodoAReemplazar = nodoReemplazo;
+        return 0;
+    }
+    else if((*nodoAReemplazar)->der == NULL){
+        ///si no tiene nodo derecho
+        ///reemplazo por el siguiente izquierdo.
+        nodoReemplazo = (*nodoAReemplazar)->izq;
+        free((*nodoAReemplazar)->data);
+        free(*nodoAReemplazar);
+        *nodoAReemplazar = nodoReemplazo;
+        return 0;
+
+    }
+    else{
+        ///busco un nodo para reemplazar el nodo que voy a eliminar en su subarbol derecho (el mas chico del derecho que dejaria el arbol preservando su estructura)
+        pNodoReemplazo = BuscarMenorSubArbol(&(*nodoAReemplazar)->der);
+        ///hay dos chances. 1. Que el menor sea una hoja o que solo tenga un hijo derecho (izquierdo no puede tener porque para encontrar el mas chico ya recorri todo hacia la izquierda)
+
+        ///si es hoja
+        nodoReemplazo = *pNodoReemplazo;
+        ///copio datos de un nodo al otro
+        dataCopiada = malloc(nodoReemplazo->dataSize);
+        memcpy(dataCopiada, nodoReemplazo->data, nodoReemplazo->dataSize);
+        ///una vez copiada la data borro la data del nodo original y le asigno la nueva.
+        free((*nodoAReemplazar)->data);
+        (*nodoAReemplazar)->data = dataCopiada;
+        (*nodoAReemplazar)->dataSize = nodoReemplazo->dataSize;
+        ///borro el nodo que movi los datos.
+        *pNodoReemplazo = nodoReemplazo->der;
+        free(nodoReemplazo->data);
+        free(nodoReemplazo);
+        return 0;
+    }
+}
 
