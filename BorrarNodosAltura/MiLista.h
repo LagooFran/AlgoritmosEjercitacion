@@ -23,4 +23,6 @@ int SacarDelFinal(tLista *lista, void *dataDest);
 void DestruirLista(tLista *lista);
 void InsertarSinDuplicados(tLista *, void *, size_t , int cmp(void*, void*), void acumular(void *, void *));
 void InsertarSinDuplicadosOrdenado(tLista *, void *, size_t , int cmp(void*, void*), void acumular(void *, void *));
+void MostrarLista(tLista *, void (mostrar)(void *));
+void OrdenarLista(tLista *, int (cmp)(void *, void *));
 #endif // MILISTA_H_INCLUDED

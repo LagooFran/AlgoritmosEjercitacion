@@ -7,15 +7,15 @@
 	<stdlib.h>
 	<string.h>
 
-1750810228 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\borrarnodosaltura\milista.c
+1750864809 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\borrarnodosaltura\milista.c
 	"MiLista.h"
 
-1750812037 c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\borrarnodosaltura\milista.h
+1750864802 c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\borrarnodosaltura\milista.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-1750812193 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\borrarnodosaltura\main.c
+1750864843 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\borrarnodosaltura\main.c
 	<stdio.h>
 	<stdlib.h>
 	"MiLista.h"

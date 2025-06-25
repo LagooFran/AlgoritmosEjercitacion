@@ -167,3 +167,50 @@ void InsertarSinDuplicadosOrdenado(tLista *lista, void *data, size_t dataSize, i
     return;
 
 }
+
+void OrdenarLista(tLista *lista, int (cmp)(void *, void *)){
+
+    tNodo2 *nodoActual;
+    tNodo2 *nodoSiguiente;
+    tNodo2 *nodoPrevio = NULL;
+    int huboCambios = 0;
+
+    if(ListaVacia(lista)){
+        return; ///la lista esta vacia. Que voy a ordenar!!!
+    }
+
+
+    do{
+        huboCambios = 0;
+        nodoPrevio = NULL;
+        nodoActual = *lista;
+        while(nodoActual != NULL && nodoActual->sig != NULL){
+            nodoSiguiente = nodoActual->sig;
+            printf("cmp %d\n", cmp(nodoActual->data, nodoSiguiente->data));
+            if(cmp(nodoActual->data, nodoSiguiente->data) == 1){
+                ///si el nodo actual es mas grande que el siguiente lo tengo que mover hacia adelante
+                if(nodoPrevio == NULL){
+                    *lista = nodoSiguiente;
+                }
+                else{
+                    nodoPrevio->sig = nodoSiguiente;
+                }
+                nodoActual->sig = nodoSiguiente->sig;
+                nodoSiguiente->sig = nodoActual;
+                nodoActual = nodoSiguiente;
+                huboCambios = 1;
+            }
+
+            nodoPrevio = nodoActual;
+            nodoActual = nodoActual->sig;
+        }
+    }while(huboCambios);
+}
+
+void MostrarLista(tLista *lista, void (mostrar)(void *)){
+    tNodo2 *nodoActual = *lista;
+    while(nodoActual != NULL){
+        mostrar(nodoActual->data);
+        nodoActual = nodoActual->sig;
+    }
+}
