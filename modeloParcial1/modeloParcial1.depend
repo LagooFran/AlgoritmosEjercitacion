@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1752242464 source:/home/flago/Documents/GitHub/AlgoritmosEjercitacion/modeloParcial1/MiArbol.c
+	"MiArbol.h"
+
+1752241956 /home/flago/Documents/GitHub/AlgoritmosEjercitacion/modeloParcial1/MiArbol.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1752241902 source:/home/flago/Documents/GitHub/AlgoritmosEjercitacion/modeloParcial1/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"MiArbol.h"
+
