@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1750634970 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\ejercicioparcialdeudas\milista.c
+	"MiLista.h"
+
+1750634886 c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\ejercicioparcialdeudas\milista.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1750648644 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\ejercicioparcialdeudas\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"MiLista.h"
+

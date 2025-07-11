@@ -6,7 +6,7 @@ typedef struct{
     int num;
 }persona;
 
-int cmp(const void* data, const void* data2){
+int cmp(void* data, void* data2){
 
     persona *dataCast = (persona*)data;
     persona *data2Cast = (persona*)data2;

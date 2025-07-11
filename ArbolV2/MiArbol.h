@@ -11,11 +11,17 @@ typedef struct sNodo{
     struct sNodo *der;
 }tNodo;
 
+typedef struct{
+    char nombre[20];
+    int num;
+}persona2;
+
+
 typedef tNodo *tArbol;
 
 void CrearArbol(tArbol *);
 int ArbolVacio(tArbol *);
-int InsertarEnArbol(tArbol *, void *, size_t, int (*cmp)(const void*, const void*));
+int InsertarEnArbol(tArbol *, void *, size_t, int (*cmp)(void*, void*));
 int ArbolLleno(size_t);
 void RecorrerEnOrden(tArbol *arbol, void (*mostrar)(const void*));
 void RecorrerEnPreOrden(tArbol *arbol, void (*mostrar)(const void*));
@@ -24,6 +30,6 @@ int BuscarEnArbol(tArbol *, void *, void *, size_t , int (*cmp)(const void*, con
 int BuscarAltura(tArbol *);
 int EsCompleto(tArbol *);
 int EsBalanceado(tArbol *);
-int EliminarNodo(tArbol *arbol, void *data, int (*cmp)(const void*, const void*));
+int EliminarNodo(tArbol *, void *, int (*cmp)(void*, void*));
 
 #endif // MIARBOL_H_INCLUDED
