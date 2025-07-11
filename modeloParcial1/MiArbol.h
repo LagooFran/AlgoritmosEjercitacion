@@ -16,5 +16,7 @@ typedef tNodo *tArbol;
 void CrearArbol(tArbol *);
 int InsertarEnArbol(tArbol *, void *, size_t, int(cmp)(void *, void *));
 void RecorrerInOrden(tArbol *, void(mostrar)(void *));
+int ContarOcurrenciasNoClave(tArbol *, void *, int cmpdato(void *, void *));
+void EspejarArbol(tArbol *);
 
 #endif // MIARBOL_H_INCLUDED

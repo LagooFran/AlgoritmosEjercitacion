@@ -25,14 +25,26 @@ int cmp(void *data1, void *data2){
     }
 }
 
+int cmpdato(void *data1, void *data2){
+    int *dataCast = (int*)data1;
+    persona *dataCast2 = (persona *)data2;
+    if(*dataCast == dataCast2->edad){
+        return 0;
+    }
+    else{
+        return -1;
+    }
+}
+
 void mostrar(void *data){
     persona *dataCast = (persona*)data;
-    printf("persona %s, %d, %d", dataCast->nombre, dataCast->edad, dataCast->valor);
+    printf("persona %s, %d, %d\n", dataCast->nombre, dataCast->edad, dataCast->valor);
 
 }
 
 int main()
 {
+    int valorTesteo = 21;
     tArbol arbol;
     tArbol *pArbol = &arbol;
     CrearArbol(pArbol);
@@ -69,7 +81,9 @@ int main()
         InsertarEnArbol(pArbol, pp, sizeof(persona), cmp);
     }
 
-    //RecorrerInOrden(pArbol, mostrar);
-
+    RecorrerInOrden(pArbol, mostrar);
+    printf("Cantidad de apariciones: %d", ContarOcurrenciasNoClave(pArbol, &valorTesteo, cmpdato));
+    EspejarArbol(pArbol);
+    RecorrerInOrden(pArbol, mostrar);
     return 0;
 }
