@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1752424668 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\modeloparcial3\main.c
+	<stdio.h>
+	<stdlib.h>
+	"arbol.h"
+
+1752423937 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\modeloparcial3\arbol.c
+	"arbol.h"
+
+1752424291 c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\modeloparcial3\arbol.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

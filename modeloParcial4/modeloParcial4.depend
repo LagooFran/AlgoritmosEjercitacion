@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1752444340 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\modeloparcial4\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"cola.h"
+
+1752436723 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\modeloparcial4\creardatos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1752438429 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\modeloparcial4\cola.c
+	"cola.h"
+
+1752438453 c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\modeloparcial4\cola.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
