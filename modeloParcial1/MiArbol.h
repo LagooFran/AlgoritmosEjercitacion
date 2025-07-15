@@ -18,5 +18,11 @@ int InsertarEnArbol(tArbol *, void *, size_t, int(cmp)(void *, void *));
 void RecorrerInOrden(tArbol *, void(mostrar)(void *));
 int ContarOcurrenciasNoClave(tArbol *, void *, int cmpdato(void *, void *));
 void EspejarArbol(tArbol *);
+int CantidadDeNodos(tArbol *);
+int AlturaArbol(tArbol *);
+int CantidadDeNodosHastaNivel(tArbol *, int);
+int EsBalanceado(tArbol *);
+void PodarHastaNivel(tArbol *, tArbol *, int, int (cmp)(void *, void *));
+int NivelNodo(tArbol *, void *, int (cmp)(void *, void *));
 
 #endif // MIARBOL_H_INCLUDED

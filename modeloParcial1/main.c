@@ -44,7 +44,7 @@ void mostrar(void *data){
 
 int main()
 {
-    int valorTesteo = 21;
+    int valorTesteo = 25;
     tArbol arbol;
     tArbol *pArbol = &arbol;
     CrearArbol(pArbol);
@@ -82,8 +82,16 @@ int main()
     }
 
     RecorrerInOrden(pArbol, mostrar);
-    printf("Cantidad de apariciones: %d", ContarOcurrenciasNoClave(pArbol, &valorTesteo, cmpdato));
-    EspejarArbol(pArbol);
+    printf("\n\nCantidad de apariciones: %d\n\n", ContarOcurrenciasNoClave(pArbol, &valorTesteo, cmpdato));
+    printf("cantidad nodos: %d\n\n", CantidadDeNodos(pArbol));
+    printf("Altura: %d\n\n", AlturaArbol(pArbol));
+    printf("cantidad nodos hasta altura: %d\n\n", CantidadDeNodosHastaNivel(pArbol, AlturaArbol(pArbol)-1));
+    printf("Es balanceado: %d\n\n", EsBalanceado(pArbol));
+    //printf("Nivel nodo %d", NivelNodo(pArbol, &valorTesteo, cmp));
+    PodarHastaNivel(pArbol, pArbol, 0, cmp);
     RecorrerInOrden(pArbol, mostrar);
+
+    //EspejarArbol(pArbol);
+    //RecorrerInOrden(pArbol, mostrar);
     return 0;
 }

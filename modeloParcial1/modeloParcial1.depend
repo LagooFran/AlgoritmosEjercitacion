@@ -13,17 +13,18 @@
 	<string.h>
 	"MiArbol.h"
 
-1752256542 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\modeloparcial1\main.c
+1752551116 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\modeloparcial1\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"MiArbol.h"
 
-1752256555 c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\modeloparcial1\miarbol.h
+1752550647 c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\modeloparcial1\miarbol.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-1752255814 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\modeloparcial1\miarbol.c
+1752551167 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\modeloparcial1\miarbol.c
 	"MiArbol.h"
+	<math.h>
 

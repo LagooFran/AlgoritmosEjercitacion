@@ -1,4 +1,5 @@
 #include "MiArbol.h"
+#include <math.h>
 
 void CrearArbol(tArbol *arbol){
     *arbol = NULL;
@@ -88,4 +89,79 @@ void EspejarArbol(tArbol *arbol){
     (*arbol)->izq = (*arbol)->der;
     (*arbol)->der = aux;
 
+}
+
+int CantidadDeNodos(tArbol *arbol){
+    if(*arbol == NULL){
+        return 0;
+    }
+    return 1 + CantidadDeNodos(&(*arbol)->izq) + CantidadDeNodos(&(*arbol)->der);
+}
+
+int AlturaArbol(tArbol *arbol){
+    int izq, der;
+    if(*arbol == NULL){
+        return -1;
+    }
+
+    izq = AlturaArbol(&(*arbol)->izq);
+    der = AlturaArbol(&(*arbol)->der);
+
+    if(izq > der){
+        return 1+izq;
+    }
+    else{
+        return 1+der;
+    }
+}
+
+int EsBalanceado(tArbol *arbol){
+    return CantidadDeNodosHastaNivel(arbol, AlturaArbol(arbol)-1) == pow(2, AlturaArbol(arbol)-1)-1;
+}
+
+int CantidadDeNodosHastaNivel(tArbol *arbol, int nivel){
+    if(*arbol == NULL){
+        return 0;
+    }
+    if(nivel < 0){
+        return 0;
+    }
+
+    return 1 + CantidadDeNodosHastaNivel(&(*arbol)->izq, nivel-1) + CantidadDeNodosHastaNivel(&(*arbol)->der, nivel-1);
+
+}
+
+int NivelNodo(tArbol *arbol, void *data, int (cmp)(void *, void *)){
+    int cont=0, comparacion;
+
+    ///devuelve el nivel del nodo buscado
+     while(*arbol != NULL){
+        comparacion = cmp(data, (*arbol)->data);
+        if(comparacion > 0){
+            arbol = &(*arbol)->der;
+            cont++;
+        }
+        else if(comparacion < 0){
+            arbol = &(*arbol)->izq;
+            cont++;
+        }
+        else{
+            return cont; ///ya existe el nodo
+        }
+    }
+    return -1; ///no existe el nodo
+}
+
+void PodarHastaNivel(tArbol *arbolEntero, tArbol *arbol, int nivel, int (cmp)(void *, void *)){
+    ///poda todos los nodos que esten en niveles mas altos que "nivel"
+    if(*arbol == NULL){
+        return;
+    }
+    PodarHastaNivel(arbolEntero, &(*arbol)->izq, nivel, cmp);
+    PodarHastaNivel(arbolEntero, &(*arbol)->der, nivel, cmp);
+    if(NivelNodo(arbolEntero, (*arbol)->data, cmp) > nivel){
+        free((*arbol)->data);
+        free(*arbol);
+        *arbol = NULL;
+    }
 }
