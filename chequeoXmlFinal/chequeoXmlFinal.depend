@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1753595736 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\chequeoxmlfinal\main.c
+	<stdio.h>
+	<stdlib.h>
+	"pila.h"
+
+1753581102 c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\chequeoxmlfinal\pila.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1753581500 source:c:\users\fran0\onedrive\documentos\github\algoritmosejercitacion\chequeoxmlfinal\pila.c
+	"pila.h"
+
