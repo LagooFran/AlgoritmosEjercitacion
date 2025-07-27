@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1752580269 source:/home/flago/Documents/GitHub/AlgoritmosEjercitacion/ejercicioIndices/MiArbol.c
+	"MiArbol.h"
+
+1752578786 /home/flago/Documents/GitHub/AlgoritmosEjercitacion/ejercicioIndices/MiArbol.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+
+1752580220 source:/home/flago/Documents/GitHub/AlgoritmosEjercitacion/ejercicioIndices/main.c
+	<stdio.h>
+	<stdlib.h>
+	"MiArbol.h"
+
