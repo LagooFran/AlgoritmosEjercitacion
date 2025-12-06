@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1765061947 source:/home/fran/Documentos/GitHub/AlgoritmosEjercitacion/finalLlamadoC/lista.c
+	"lista.h"
+
+1765062160 /home/fran/Documentos/GitHub/AlgoritmosEjercitacion/finalLlamadoC/lista.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1765061961 source:/home/fran/Documentos/GitHub/AlgoritmosEjercitacion/finalLlamadoC/main.c
+	<stdio.h>
+	<stdlib.h>
+	"lista.h"
+
