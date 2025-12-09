@@ -56,21 +56,41 @@ void AgregarTerminoOrd(tLista *l, void *data, size_t dataSize){
     else{
         while(aux != NULL){
             memcpy(pValor1, data, sizeof(termino));
-            memcpy(pValor2, data, sizeof(termino));
-            if(pValor1->potencia > pValor2->potencia){
+            memcpy(pValor2, aux->data, sizeof(termino));
+            if(pValor1->potencia < pValor2->potencia){
                 ant = aux;
                 aux = aux->sig;
+                continue;
             }
+            break;
         }
 
         if(ant == NULL){
-             nuevoNodo->sig = *l;
-             (*l)->sig = NULL;
+             nuevoNodo->sig = aux;
+             aux->sig = NULL;
+             *l = nuevoNodo;
         }
         else{
             ant->sig = nuevoNodo;
             nuevoNodo->sig = aux;
         }
+    }
+
+}
+
+void MostrarTodosLosDatos(tLista *l){
+
+    tNodo *aux = *l;
+    ///no necesario si fuera generico
+    termino t;
+    termino *pT = &t;
+
+
+    while(aux != NULL){
+        ///aca iria la parte generica que no llego...
+        memcpy(pT, aux->data, sizeof(termino));
+        printf("%dX**%d\n", pT->base, pT->potencia);
+        aux = aux->sig;
     }
 
 }

@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1765225144 source:/home/fran/Documentos/GitHub/AlgoritmosEjercitacion/parcialQueHice/lista.c
+	"lista.h"
+
+1765225188 source:/home/fran/Documentos/GitHub/AlgoritmosEjercitacion/parcialQueHice/puntaje.c
+	"puntaje.h"
+
+1765225057 source:/home/fran/Documentos/GitHub/AlgoritmosEjercitacion/parcialQueHice/main.c
+	<stdio.h>
+	<stdlib.h>
+	"lista.h"
+	"puntaje.h"
+
+1765225501 /home/fran/Documentos/GitHub/AlgoritmosEjercitacion/parcialQueHice/lista.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1765225499 /home/fran/Documentos/GitHub/AlgoritmosEjercitacion/parcialQueHice/puntaje.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lista.h"
+

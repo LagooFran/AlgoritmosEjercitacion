@@ -23,5 +23,6 @@ typedef struct{
 void CrearLista(tLista *);
 void AgregarTerminoOrd(tLista *, void *, size_t);
 int ListaVacia(tLista *);
+void MostrarTodosLosDatos(tLista *);
 
 #endif // LISTA_H_INCLUDED
