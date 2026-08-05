@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1785168990 source:c:\users\fran0\documents\github\algoritmosejercitacion\parcialregularmar\modelodeparcialalertas\lista.c
+	<stdio.h>
+	<stdlib.h>
+	"tipos.h"
+	"lista.h"
+	<string.h>
+
+1785112211 c:\users\fran0\documents\github\algoritmosejercitacion\parcialregularmar\modelodeparcialalertas\tipos.h
+
+1785168948 c:\users\fran0\documents\github\algoritmosejercitacion\parcialregularmar\modelodeparcialalertas\lista.h
+
+1785169086 source:c:\users\fran0\documents\github\algoritmosejercitacion\parcialregularmar\modelodeparcialalertas\main.c
+	<stdio.h>
+	<stdlib.h>
+	"tipos.h"
+	"lista.h"
+	<string.h>
+
