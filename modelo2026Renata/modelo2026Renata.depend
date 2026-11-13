@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1794578689 source:/home/frannotebook/Documentos/modelo2026Renata/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"pila.h"
+
+1794575985 /home/frannotebook/Documentos/modelo2026Renata/pila.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1794576013 source:/home/frannotebook/Documentos/modelo2026Renata/pila.c
+	"pila.h"
+

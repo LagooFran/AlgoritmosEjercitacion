@@ -1,0 +1,10 @@
+/home/user/downloads/file.txt
+/
+/documents
+/
+/downloads/downloads
+/home/user/downloads/file.txt
+/
+/documents
+/
+/downloads/downloads

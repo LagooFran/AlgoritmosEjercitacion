@@ -1,0 +1,5 @@
+/home/user///documents/../downloads/./file.txt
+/user////////..
+//////documents
+/home/../../..
+/downloads/downloads/../downloads/.
